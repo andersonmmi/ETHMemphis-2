@@ -39,7 +39,8 @@ class ApplicationForm extends Component{
       this.state.email,
       this.state.gitHubUrl,
       this.state.linkedInUrl,
-      this.state.interest
+      this.state.interest,
+      {from: web3.eth.accounts[0], gas: 3000000}
     );
     console.log(apply);
     // owner = String(getRoomInfo[0]).split(',');
