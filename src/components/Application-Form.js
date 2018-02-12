@@ -95,20 +95,43 @@ class ApplicationForm extends Component{
     const fieldset={
         border: '2px solid #F4BE41'
     }
+    const labelStyle={
+      padding: "6px",
+      display: "flex"
+    }
+    const inputStyle={
+      flexGrow: "1",
+      marginLeft: "6px"
+    }
+    const buttonStyle={
+      width: "-webkit-fill-available"
+    }
     return(
       <div style={style} className="ApplicationForm">
         <fieldset style={fieldset}>
           <legend style={roomStyle}>Apply Here!</legend>
-          <label>Room ID:
-            <input id="firstName" type="text" onChange={this.handleTextChange} value={this.state.firstName} />
-            <input id="lastName" type="text" onChange={this.handleTextChange} value={this.state.lastName} />
-            <input id="email" type="text" onChange={this.handleTextChange} value={this.state.email} />
-            <input id="gitHubUrl" type="text" onChange={this.handleTextChange} value={this.state.gitHubUrl} />
-            <input id="linkedInUrl" type="text" onChange={this.handleTextChange} value={this.state.linkedInUrl} />
-            <input id="interest" type="text" onChange={this.handleTextChange} value={this.state.interest} />
-            <input id="submit" type="submit" value="Apply!" onClick={this.handleSubmit} />
-          </label>
-
+          <p style={labelStyle}>First Name:
+            <input id="firstName" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.firstName} />
+          </p>
+          <p style={labelStyle}>Last Name:
+            <input id="lastName" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.lastName} />
+          </p>
+          <p style={labelStyle}>Email:
+            <input id="email" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.email} />
+          </p>
+          <p style={labelStyle}>GitHub URL:
+            <input id="gitHubUrl" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.gitHubUrl} />
+          </p>
+          <p style={labelStyle}>LinkedIn URL:
+            <input id="linkedInUrl" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.linkedInUrl} />
+          </p>
+          <p style={labelStyle}>Your skills and interests:
+            <input id="interest" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.interest} />
+          </p>
+          <hr/>
+          <p style={labelStyle}>
+            <input id="submit" type="submit" value="Apply!" style={inputStyle} onClick={this.handleSubmit} />
+          </p>
         </fieldset>
       </div>
     )
