@@ -2,10 +2,30 @@ import React, { Component } from 'react';
 import Web3 from 'web3';
 
 let apply, firstName, lastName, email, gitHubUrl, linkedInUrl, interest;
+/*
 let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
+*/
+
+let web3 = window.web3;
 
 let AFAbi = require('../../ABIs/Application-Form-Abi.js');
-let AFAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10';
+let AFAddress = require("../../ContractAddress/rinkebyAddress.js");
+
+window.addEventListener('load', function() {
+
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider
+    console.log('web3 exists.')
+    web3 = new Web3(web3.currentProvider);
+  } else {
+    console.log('No web3? You should consider trying MetaMask!')
+    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+  }
+
+})
+
 let AF = web3.eth.contract(AFAbi).at(AFAddress);
 
 class ApplicationForm extends Component{
@@ -33,9 +53,9 @@ class ApplicationForm extends Component{
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("Apply fired!");
-    apply = AF.apply(this.state.firstName,
-      this.state.lastName,
+    apply = AF.apply(
       this.state.firstName,
+      this.state.lastName,
       this.state.email,
       this.state.gitHubUrl,
       this.state.linkedInUrl,
