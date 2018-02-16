@@ -2,32 +2,7 @@ import React, { Component } from 'react';
 import Web3 from 'web3';
 
 let apply, firstName, lastName, email, gitHubUrl, linkedInUrl, interest;
-<<<<<<< HEAD
-/*
-let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
-*/
 
-let web3 = window.web3;
-
-let AFAbi = require('../../ABIs/Application-Form-Abi.js');
-let AFAddress = require("../../ContractAddress/rinkebyAddress.js");
-
-window.addEventListener('load', function() {
-
-  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  if (typeof web3 !== 'undefined') {
-    // Use Mist/MetaMask's provider
-    console.log('web3 exists.')
-    web3 = new Web3(web3.currentProvider);
-  } else {
-    console.log('No web3? You should consider trying MetaMask!')
-    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  }
-
-})
-
-=======
 // let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
 let web3 = window.web3
 // stolen code zone vvv
@@ -46,7 +21,6 @@ if (typeof web3 !== 'undefined') {
 
 let AFAbi = require('../../ABIs/Application-Form-Abi.js');
 let AFAddress = require('../../Contract-Address/Rinkeby-Address.js');
->>>>>>> 855f0471bcd75c671113fe0997f3137095446e90
 let AF = web3.eth.contract(AFAbi).at(AFAddress);
 
 class ApplicationForm extends Component{
@@ -74,8 +48,6 @@ class ApplicationForm extends Component{
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("Apply fired!");
-<<<<<<< HEAD
-=======
     console.log(AF.getTotalApplications((err,res)=>{
       if(err){
         console.log("there is an error with the callback");
@@ -83,7 +55,6 @@ class ApplicationForm extends Component{
       console.log("success!");
       console.log(res);
     }));
->>>>>>> 855f0471bcd75c671113fe0997f3137095446e90
     apply = AF.apply(
       this.state.firstName,
       this.state.lastName,
