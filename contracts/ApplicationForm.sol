@@ -11,12 +11,13 @@ contract ApplicationForm {
      */
 
     struct Application {
-        string firstName;
-        string lastName;
-        string email;
-        string gitHubUrl;
-        string linkedInUrl;
-        string interest;
+        bytes32 firstName;
+        bytes32 lastName;
+        bytes32 email;
+        bytes32 gitHubUrl;
+        bytes32 linkedInUrl;
+        bytes32 interest;
+        bool shareRoom;
     }
 
     Application[] applications;
@@ -34,14 +35,18 @@ contract ApplicationForm {
      */
 
     function ApplicationForm() public {
+
+        // initialize applications array
         apply(
             "Brian",
             "W",
             "doNotContact@me.io",
             "gitMe",
             "something",
-            "loveMemphis!");
+            "loveMemphis!",
+            true);
 
+        // add first organzier
         organizers.push(msg.sender);
     }
 
@@ -72,12 +77,13 @@ contract ApplicationForm {
     }
 
     function apply(
-        string _firstName,
-        string _lastName,
-        string _email,
-        string _gitHubUrl,
-        string _linkedInUrl,
-        string _interest
+        bytes32 _firstName,
+        bytes32 _lastName,
+        bytes32 _email,
+        bytes32 _gitHubUrl,
+        bytes32 _linkedInUrl,
+        bytes32 _interest,
+        bool _shareRoom
     )
 
     public
@@ -90,7 +96,8 @@ contract ApplicationForm {
     email: _email,
     gitHubUrl: _gitHubUrl,
     linkedInUrl: _linkedInUrl,
-    interest: _interest
+    interest: _interest,
+    shareRoom: _shareRoom
     });
 
     applications.push(_app);
@@ -101,6 +108,40 @@ contract ApplicationForm {
      *  GET FUNCTIONS
      */
 
+    function getApplicants()
+
+    external
+    onlyOrganizer
+    view
+    returns
+    (
+    bytes32[],
+    bytes32[],
+    bytes32[],
+    bytes32[],
+    bool[]
+    ) {
+        uint256 length = getTotalApplications();
+
+        bytes32[] memory emails = new bytes32[](length);
+        bytes32[] memory gits = new bytes32[](length);
+        bytes32[] memory lins = new bytes32[](length);
+        bytes32[] memory interests = new bytes32[](length);
+        bool[] memory shares = new bool[](length);
+
+        for (uint i=0; i<length; i++) {
+            Application memory _applicant = applications[i];
+
+            emails[i] = _applicant.email;
+            gits[i] = _applicant.gitHubUrl;
+            lins[i] = _applicant.linkedInUrl;
+            interests[i] = _applicant.interest;
+            shares[i] = _applicant.shareRoom;
+        }
+
+        return (emails,gits,lins,interests,shares);
+    }
+
     function getApplicant(uint256 _n)
 
     external
@@ -108,12 +149,13 @@ contract ApplicationForm {
     view
     returns
     (
-    string _firstName,
-    string _lastName,
-    string _email,
-    string _gitHubUrl,
-    string _linkedInUrl,
-    string _interest
+    bytes32 _firstName,
+    bytes32 _lastName,
+    bytes32 _email,
+    bytes32 _gitHubUrl,
+    bytes32 _linkedInUrl,
+    bytes32 _interest,
+    bool _shareRoom
     ){
         require(_n < applications.length);
 
@@ -125,9 +167,10 @@ contract ApplicationForm {
         _gitHubUrl = _applicant.gitHubUrl;
         _linkedInUrl = _applicant.linkedInUrl;
         _interest = _applicant.interest;
+        _shareRoom = _applicant.shareRoom;
     }
 
-    function getTotalApplications() external view returns (uint256) {
+    function getTotalApplications() public view returns (uint256) {
        return applications.length - 1;
     }
 }
