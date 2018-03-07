@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
+import styles from './styles.css'
 
 let apply, firstName, lastName, email, gitHubUrl, linkedInUrl, interest;
 // let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
@@ -33,6 +34,8 @@ class ApplicationForm extends Component{
       linkedInUrl : '',
       interest : ''
     }
+
+    this.imgUrl = './ethMemphis.jpg';
 
     this.handleSubmit=this.handleSubmit.bind(this);
     this.handleTextChange=this.handleTextChange.bind(this);
@@ -71,98 +74,39 @@ class ApplicationForm extends Component{
       }
     );
     console.log(apply);
-    // owner = String(getRoomInfo[0]).split(',');
-    // renter = String(getRoomInfo[1]).split(',');
-    // minRentTime = String(getRoomInfo[2]).split(',');
-    // numBeds = String(getRoomInfo[3]).split(',');
-    // this.setState({
-    //   firstName : '',
-    //   lastName : '',
-    //   email : '',
-    //   gitHubUrl : '',
-    //   linkedInUrl : '',
-    //   interest : ''
-    // });
   }
 
   render(){
-    const style={
-      backgroundColor: '#4D4D4D',
-      padding: '10px',
-      fontWeight: 'bold',
-      width: '420px',
-      marginTop: '5px',
-      marginBottom: '5px',
-      /*
-      color: '',
-      textAlign: '',
-      border: '',
-      margin: '',
-      display: '',
-      clear: '',
-      float: '',
-      paddingTop: '',
-      paddingRight: '',
-      paddingBottom: '',
-      paddingLeft: ''
-      */
-    }
-    const roomStyle={
-      textDecoration: 'overline underline',
-      border: '10px #F4BE41',
-      borderWidth: '10px',
-      backgroundColor: 'white',
-      textAlign: 'center',
-      fontSize: '40px',
-      color: '#3973B5'
-    }
-    const superStyle={
-      border: "2px solid #383838",
-      borderTop: "2px solid red",
-      backgroundColor: "white"
-    }
-    const fieldset={
-        border: '2px solid #F4BE41'
-    }
-    const labelStyle={
-      padding: "6px",
-      display: "flex"
-    }
-    const inputStyle={
-      flexGrow: "1",
-      marginLeft: "6px"
-    }
-    const buttonStyle={
-      width: "-webkit-fill-available"
-    }
     return(
-      <div style={style} className="ApplicationForm">
-        <fieldset style={fieldset}>
-          <legend style={roomStyle}>Apply Here!</legend>
-          <p style={labelStyle}>First Name:
-            <input id="firstName" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.firstName} />
+      <main className="container">
+      <div className="ApplicationForm">
+        <fieldset>
+          <legend><img src='ethmemphis-logo.png'></img></legend>
+          <p>First Name:
+            <input id="firstName" type="text" onChange={this.handleTextChange} value={this.state.firstName} />
           </p>
-          <p style={labelStyle}>Last Name:
-            <input id="lastName" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.lastName} />
+          <p>Last Name:
+            <input id="lastName" type="text" onChange={this.handleTextChange} value={this.state.lastName} />
           </p>
-          <p style={labelStyle}>Email:
-            <input id="email" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.email} />
+          <p>Email:
+            <input id="email" type="text" onChange={this.handleTextChange} value={this.state.email} />
           </p>
-          <p style={labelStyle}>GitHub URL:
-            <input id="gitHubUrl" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.gitHubUrl} />
+          <p>GitHub URL:
+            <input id="gitHubUrl" type="text" onChange={this.handleTextChange} value={this.state.gitHubUrl} />
           </p>
-          <p style={labelStyle}>LinkedIn URL:
-            <input id="linkedInUrl" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.linkedInUrl} />
+          <p>LinkedIn URL:
+            <input id="linkedInUrl" type="text" onChange={this.handleTextChange} value={this.state.linkedInUrl} />
           </p>
-          <p style={labelStyle}>Your skills and interests:
-            <input id="interest" type="text" style={inputStyle} onChange={this.handleTextChange} value={this.state.interest} />
+          <p>Your skills and interests:
+            <input id="interest" type="text" onChange={this.handleTextChange} value={this.state.interest} />
           </p>
           <hr/>
-          <p style={labelStyle}>
-            <input id="submit" type="submit" value="Apply!" style={inputStyle} onClick={this.handleSubmit} />
+          <p>
+            <input id="submit" type="submit" value="Apply!" onClick={this.handleSubmit} />
           </p>
         </fieldset>
       </div>
+      </main>
     )
   }
 }
