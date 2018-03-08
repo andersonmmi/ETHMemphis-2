@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
-import './styles.css';
 import ethmemphisLogo from './ethmemphis-logo.png';
+import '../css/oswald.css';
+import '../css/open-sans.css';
+import '../css/pure-min.css';
+import './styles.css';
 
 let apply;
 // let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
@@ -103,7 +106,7 @@ class ApplicationForm extends Component{
           </p>
           <hr/>
           <p>
-            <input id="submit" type="submit" value="Apply!" onClick={this.handleSubmit} />
+            <input id="submit" type="submit" value="Select Rinkeby Test Network in MetaMask and Click Here!" onClick={this.handleSubmit} />
           </p>
         </fieldset>
       </div>

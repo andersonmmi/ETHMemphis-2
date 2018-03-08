@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 // Layouts
-import App from './App'
 import ApplicationForm from './components/Application-Form.js'
 
 // Redux Store
@@ -16,8 +15,7 @@ const history = syncHistoryWithStore(browserHistory, store)
 ReactDOM.render((
     <Provider store={store}>
       <Router history={history}>
-        <Route path="/" component={App}>
-          <IndexRoute component={ApplicationForm} />
+        <Route path="/" component={ApplicationForm}>
         </Route>
       </Router>
     </Provider>
