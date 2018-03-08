@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
-import styles from './styles.css'
+import './styles.css';
+import ethmemphisLogo from './ethmemphis-logo.png';
 
-let apply, firstName, lastName, email, gitHubUrl, linkedInUrl, interest;
+let apply;
 // let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
 let web3 = window.web3
 // stolen code zone vvv
@@ -81,7 +82,7 @@ class ApplicationForm extends Component{
       <main className="container">
       <div className="ApplicationForm">
         <fieldset>
-          <legend><img src='ethmemphis-logo.png'></img></legend>
+          <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
           <p>First Name:
             <input id="firstName" type="text" onChange={this.handleTextChange} value={this.state.firstName} />
           </p>
