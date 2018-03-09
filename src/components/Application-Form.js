@@ -81,37 +81,52 @@ class ApplicationForm extends Component{
   }
 
   render(){
-    return(
-      <main className="container">
-      <div className="ApplicationForm">
-        <fieldset>
-          <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
-          <p>First Name:
-            <input id="firstName" type="text" onChange={this.handleTextChange} value={this.state.firstName} />
-          </p>
-          <p>Last Name:
-            <input id="lastName" type="text" onChange={this.handleTextChange} value={this.state.lastName} />
-          </p>
-          <p>Email:
-            <input id="email" type="text" onChange={this.handleTextChange} value={this.state.email} />
-          </p>
-          <p>GitHub URL:
-            <input id="gitHubUrl" type="text" onChange={this.handleTextChange} value={this.state.gitHubUrl} />
-          </p>
-          <p>LinkedIn URL:
-            <input id="linkedInUrl" type="text" onChange={this.handleTextChange} value={this.state.linkedInUrl} />
-          </p>
-          <p>Your skills and interests:
-            <input id="interest" type="text" onChange={this.handleTextChange} value={this.state.interest} />
-          </p>
-          <hr/>
-          <p>
-            <input id="submit" type="submit" value="Select Rinkeby Test Network in MetaMask and Click Here!" onClick={this.handleSubmit} />
-          </p>
-        </fieldset>
-      </div>
-      </main>
-    )
+    if (typeof web3 !== 'undefined'){
+      return(
+        <main className="container">
+        <div className="ApplicationForm">
+          <fieldset>
+            <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
+            <p>First Name:
+              <input id="firstName" type="text" onChange={this.handleTextChange} value={this.state.firstName} />
+            </p>
+            <p>Last Name:
+              <input id="lastName" type="text" onChange={this.handleTextChange} value={this.state.lastName} />
+            </p>
+            <p>Email:
+              <input id="email" type="text" onChange={this.handleTextChange} value={this.state.email} />
+            </p>
+            <p>GitHub URL:
+              <input id="gitHubUrl" type="text" onChange={this.handleTextChange} value={this.state.gitHubUrl} />
+            </p>
+            <p>LinkedIn URL:
+              <input id="linkedInUrl" type="text" onChange={this.handleTextChange} value={this.state.linkedInUrl} />
+            </p>
+            <p>Your skills and interests:
+              <input id="interest" type="text" onChange={this.handleTextChange} value={this.state.interest} />
+            </p>
+            <hr/>
+            <p>
+              <input id="submit" type="submit" value="Select Rinkeby Test Network in MetaMask and Click Here!" onClick={this.handleSubmit} />
+            </p>
+          </fieldset>
+        </div>
+        </main>
+      )
+    } else {
+      return(
+        <main className="container">
+        <div className="ApplicationForm">
+          <fieldset>
+            <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
+            <p>Make sure you have MetaMask installed and you are on the Rinkeby Test Network
+            </p>
+
+          </fieldset>
+        </div>
+        </main>
+      )
+    }
   }
 }
 
