@@ -35,7 +35,7 @@ fieldset {
     rgba(10,10,10,0.7)
   );
   border: none;
-
+  background-repeat: no-repeat;
 }
 
 p {
