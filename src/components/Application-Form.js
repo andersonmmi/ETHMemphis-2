@@ -6,20 +6,20 @@ import '../css/open-sans.css';
 import '../css/pure-min.css';
 import './styles.css';
 
-let apply;
+let apply, hasWeb3;
 // let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
 let web3 = window.web3
 // stolen code zone vvv
 
-if (typeof web3 !== 'undefined') {
-  // Use Mist/MetaMask's provider
-  web3 = new Web3(window.web3.currentProvider);
-  console.log("first case");
-} else {
-  console.log('No web3? You should consider trying MetaMask!')
-    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
-}
+// if (typeof web3 !== 'undefined') {
+//   // Use Mist/MetaMask's provider
+//   web3 = new Web3(window.web3.currentProvider);
+//   console.log("first case");
+// } else {
+//   console.log('No web3? You should consider trying MetaMask!')
+//     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+//   web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
+// }
 
 // stolen code zone ^^^
 
@@ -82,7 +82,7 @@ class ApplicationForm extends Component{
 
   render(){
     if (typeof web3 !== 'undefined'){
-      return(
+      hasWeb3 =
         <main className="container">
         <div className="ApplicationForm">
           <fieldset>
@@ -112,21 +112,24 @@ class ApplicationForm extends Component{
           </fieldset>
         </div>
         </main>
-      )
     } else {
-      return(
+      hasWeb3 =
         <main className="container">
         <div className="ApplicationForm">
           <fieldset>
             <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
             <p>Make sure you have MetaMask installed and you are on the Rinkeby Test Network
             </p>
-
           </fieldset>
         </div>
         </main>
-      )
     }
+
+    return (
+      <div>
+        {hasWeb3}
+      </div>
+    )
   }
 }
 
