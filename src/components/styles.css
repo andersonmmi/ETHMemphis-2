@@ -32,7 +32,7 @@ img {
 fieldset {
   background: linear-gradient(
     rgba(10,10,10,0.0),
-    rgba(10,10,10,0.7)
+    rgba(10,10,10,1.0)
   );
   border: none;
   background-repeat: no-repeat;
@@ -43,6 +43,23 @@ p {
   display: flex;
   flex-direction: row;
   font-weight: lighter;
+  text-align: center;
+}
+
+label {
+  color: rgba(234,240,241, 0.95);
+  display: flex;
+  flex-direction: row;
+  font-weight: lighter;
+}
+.spacer{
+  width: 2em;
+}
+#yes {
+  flex-grow: 0;
+}
+#no {
+  flex-grow: 0;
 }
 
 input {
@@ -57,8 +74,17 @@ input {
 }
 
 #submit {
-  background-color: rgba(246,151,0,0.95);
+  background-color: rgba(9,135,199,0.95);
   border-radius: 10px;
-  color: rgba(10,10,10,1.0);
+  color: rgba(234,240,241, 1.0);
   height: 27px;
+
+}
+.instructions{
+  justify-content: center;
+}
+.radio{
+  background-color: rgba(246,151,0,0.95);
+  width: 4px;
+
 }

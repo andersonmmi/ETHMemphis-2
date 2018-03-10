@@ -6,7 +6,7 @@ import '../css/open-sans.css';
 import '../css/pure-min.css';
 import './styles.css';
 
-let apply, hasWeb3;
+let apply, hasWeb3, AFAbi, AFAddress, AF;
 // let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
 let web3 = window.web3
 // stolen code zone vvv
@@ -14,18 +14,18 @@ let web3 = window.web3
 if (typeof web3 !== 'undefined') {
   // Use Mist/MetaMask's provider
   web3 = new Web3(window.web3.currentProvider);
+  AFAbi = require('../../ABIs/Application-Form-Abi.js');
+  AFAddress = require('../../Contract-Address/Rinkeby-Address.js');
+  AF = web3.eth.contract(AFAbi).at(AFAddress);
   console.log("first case");
 } else {
   console.log('No web3? You should consider trying MetaMask!')
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-  // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
+  web3 = 0;
 }
 
 // stolen code zone ^^^
 
-let AFAbi = require('../../ABIs/Application-Form-Abi.js');
-let AFAddress = require('../../Contract-Address/Rinkeby-Address.js');
-let AF = web3.eth.contract(AFAbi).at(AFAddress);
 
 class ApplicationForm extends Component{
   constructor(props){
@@ -93,8 +93,11 @@ class ApplicationForm extends Component{
     console.log(apply);
   }
 
+
+
   render(){
-    if (typeof web3 !== 'undefined'){
+    console.log(web3);
+    if (web3 !== 0){
       hasWeb3 =
         <main className="container">
         <div className="ApplicationForm">
@@ -118,13 +121,22 @@ class ApplicationForm extends Component{
             <p>Industry of Interest:
               <input id="industry" type="text" onChange={this.handleTextChange} value={this.state.industry} />
             </p>
-            <p>Willing to Share a Room?
+            <label>Willing to Share a Room?
+              <div className="spacer"></div>
               Yes<input id="yes" type="radio" onChange={this.handleRadioChange} checked={this.state.roomShare === true} value={true} />
+              <div className="spacer"></div>
               No<input id="no"  type="radio" onChange={this.handleRadioChange} checked={this.state.roomShare === false} value={false} />
-            </p>
+              <div className="spacer"></div>
+            </label>
             <hr/>
+            <p className="instructions">
+            Make sure you are logged into your primary Rinkeby account.
+            </p>
+            <p className="instructions">
+            Selected applicants will be able to reserve a free room on {"\n"} the Rinkeby test network through the BookLocal travel app.
+            </p>
             <p>
-              <input id="submit" type="submit" value="Select Rinkeby Test Network in MetaMask and Click Here!" onClick={this.handleSubmit} />
+              <input id="submit" type="submit" value="Submit Application" onClick={this.handleSubmit} />
             </p>
           </fieldset>
         </div>
