@@ -20,7 +20,7 @@ contract ApplicationForm {
         bool shareRoom;
     }
 
-    Application[] applications;
+    Application[] public applications;
 
     address[] organizers;
 
@@ -50,30 +50,8 @@ contract ApplicationForm {
     }
 
     /*
-     *  MODIFIER
-     */
-
-    modifier onlyOrganizer() {
-
-        bool isOrganizer = false;
-
-        for (uint i=0; i<organizers.length; i++) {
-            if (msg.sender == organizers[i]) {
-                isOrganizer = true;
-            }
-        }
-
-        require(isOrganizer);
-        _;
-    }
-
-    /*
      *  SET FUNCTION
      */
-
-    function addOrganzier(address _newOrganizer) onlyOrganizer external {
-        organizers.push(_newOrganizer);
-    }
 
     function apply(
         bytes32 _name,
@@ -99,7 +77,6 @@ contract ApplicationForm {
     });
 
     applications.push(_app);
-    Apply(msg.sender);
     }
 
     /*
@@ -109,7 +86,6 @@ contract ApplicationForm {
     function getApplicants()
 
     external
-    onlyOrganizer
     view
     returns
     (
@@ -119,7 +95,7 @@ contract ApplicationForm {
     bytes32[],
     bool[]
     ) {
-        uint256 length = getTotalApplications();
+        uint256 length = getTotalApplications() + 1;
 
         address[] memory applicants = new address[](length);
         bytes32[] memory emails = new bytes32[](length);
@@ -143,7 +119,6 @@ contract ApplicationForm {
     function getApplicant(uint256 _n)
 
     external
-    onlyOrganizer
     view
     returns
     (
