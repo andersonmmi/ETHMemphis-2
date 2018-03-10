@@ -32,8 +32,7 @@ class ApplicationForm extends Component{
   constructor(props){
     super(props)
     this.state = {
-      firstName : '',
-      lastName : '',
+      name : '',
       email : '',
       gitHubUrl : '',
       linkedInUrl : '',
@@ -82,12 +81,12 @@ class ApplicationForm extends Component{
       console.log(res);
     }));
     apply = AF.apply(
-      this.state.firstName,
-      this.state.lastName,
+      this.state.name,
       this.state.email,
       this.state.gitHubUrl,
       this.state.linkedInUrl,
       this.state.industry,
+      this.state.roomShare,
       {from: web3.eth.accounts[0], gas: 3000000},
       (err,res)=>{
         if(err){
@@ -96,6 +95,7 @@ class ApplicationForm extends Component{
         }
         console.log("success!");
         console.log(res);
+        alert("Thank you for applying to EthMemphis");
       }
     );
     console.log(apply);
@@ -112,11 +112,8 @@ class ApplicationForm extends Component{
         <div className="ApplicationForm">
           <fieldset>
             <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
-            <p>First Name:
-              <input id="firstName" type="text" onChange={this.handleTextChange} value={this.state.firstName} />
-            </p>
-            <p>Last Name:
-              <input id="lastName" type="text" onChange={this.handleTextChange} value={this.state.lastName} />
+            <p>Name:
+              <input id="name" type="text" onChange={this.handleTextChange} value={this.state.name} />
             </p>
             <p>Email:
               <input id="email" type="text" onChange={this.handleTextChange} value={this.state.email} />
