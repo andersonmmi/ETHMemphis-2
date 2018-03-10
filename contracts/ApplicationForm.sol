@@ -11,8 +11,8 @@ contract ApplicationForm {
      */
 
     struct Application {
-        bytes32 firstName;
-        bytes32 lastName;
+        address applicant;
+        bytes32 name;
         bytes32 email;
         bytes32 gitHubUrl;
         bytes32 linkedInUrl;
@@ -38,8 +38,7 @@ contract ApplicationForm {
 
         // initialize applications array
         apply(
-            "Brian",
-            "W",
+            "Steve",
             "doNotContact@me.io",
             "gitMe",
             "something",
@@ -77,8 +76,7 @@ contract ApplicationForm {
     }
 
     function apply(
-        bytes32 _firstName,
-        bytes32 _lastName,
+        bytes32 _name,
         bytes32 _email,
         bytes32 _gitHubUrl,
         bytes32 _linkedInUrl,
@@ -91,8 +89,8 @@ contract ApplicationForm {
 
     Application memory _app = Application({
 
-    firstName: _firstName,
-    lastName: _lastName,
+    applicant: msg.sender,
+    name: _name,
     email: _email,
     gitHubUrl: _gitHubUrl,
     linkedInUrl: _linkedInUrl,
@@ -115,7 +113,7 @@ contract ApplicationForm {
     view
     returns
     (
-    bytes32[],
+    address[],
     bytes32[],
     bytes32[],
     bytes32[],
@@ -123,23 +121,23 @@ contract ApplicationForm {
     ) {
         uint256 length = getTotalApplications();
 
+        address[] memory applicants = new address[](length);
         bytes32[] memory emails = new bytes32[](length);
         bytes32[] memory gits = new bytes32[](length);
         bytes32[] memory lins = new bytes32[](length);
-        bytes32[] memory interests = new bytes32[](length);
         bool[] memory shares = new bool[](length);
 
         for (uint i=0; i<length; i++) {
             Application memory _applicant = applications[i];
 
+            applicants[i] = _applicant.applicant;
             emails[i] = _applicant.email;
             gits[i] = _applicant.gitHubUrl;
             lins[i] = _applicant.linkedInUrl;
-            interests[i] = _applicant.interest;
             shares[i] = _applicant.shareRoom;
         }
 
-        return (emails,gits,lins,interests,shares);
+        return (applicants,emails,gits,lins,shares);
     }
 
     function getApplicant(uint256 _n)
@@ -149,8 +147,8 @@ contract ApplicationForm {
     view
     returns
     (
-    bytes32 _firstName,
-    bytes32 _lastName,
+    address _applicantAddr,
+    bytes32 _name,
     bytes32 _email,
     bytes32 _gitHubUrl,
     bytes32 _linkedInUrl,
@@ -161,8 +159,8 @@ contract ApplicationForm {
 
         Application storage _applicant = applications[_n];
 
-        _firstName = _applicant.firstName;
-        _lastName = _applicant.lastName;
+        _applicantAddr = _applicant.applicant;
+        _name = _applicant.name;
         _email = _applicant.email;
         _gitHubUrl = _applicant.gitHubUrl;
         _linkedInUrl = _applicant.linkedInUrl;
