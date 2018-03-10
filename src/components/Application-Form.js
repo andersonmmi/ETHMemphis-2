@@ -18,6 +18,7 @@ if (typeof web3 !== 'undefined') {
   AFAddress = require('../../Contract-Address/Rinkeby-Address.js');
   AF = web3.eth.contract(AFAbi).at(AFAddress);
   console.log("first case");
+
 } else {
   console.log('No web3? You should consider trying MetaMask!')
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
@@ -66,10 +67,16 @@ class ApplicationForm extends Component{
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    //  getNetwork
+
+    // end getNetwork
+
     console.log("Apply fired!");
     console.log(AF.getTotalApplications((err,res)=>{
       if(err){
         console.log("there is an error with the callback");
+        alert("There was a problem with your connection");
       }
       console.log("success!");
       console.log(res);
@@ -85,6 +92,7 @@ class ApplicationForm extends Component{
       (err,res)=>{
         if(err){
           console.log("there is an error with the callback");
+          alert("There was a problem with your connection");
         }
         console.log("success!");
         console.log(res);
@@ -96,8 +104,9 @@ class ApplicationForm extends Component{
 
 
   render(){
-    console.log(web3);
-    if (web3 !== 0){
+    console.log(typeof web3.version.network);
+    console.log(web3.version.network);
+    if (web3.version.network === "4"){
       hasWeb3 =
         <main className="container">
         <div className="ApplicationForm">
@@ -147,7 +156,9 @@ class ApplicationForm extends Component{
         <div className="ApplicationForm">
           <fieldset>
             <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
-            <p>Make sure you have MetaMask installed and you are on the Rinkeby Test Network
+            <p>Make sure you have MetaMask installed and you are on the Rinkeby Test Network.
+            </p>
+            <p>After switching to Rinkeby, hit the back button and re-navigate to the application form.
             </p>
           </fieldset>
         </div>
