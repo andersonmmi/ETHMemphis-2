@@ -11,15 +11,15 @@ let apply, hasWeb3;
 let web3 = window.web3
 // stolen code zone vvv
 
-// if (typeof web3 !== 'undefined') {
-//   // Use Mist/MetaMask's provider
-//   web3 = new Web3(window.web3.currentProvider);
-//   console.log("first case");
-// } else {
-//   console.log('No web3? You should consider trying MetaMask!')
-//     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-//   web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
-// }
+if (typeof web3 !== 'undefined') {
+  // Use Mist/MetaMask's provider
+  web3 = new Web3(window.web3.currentProvider);
+  console.log("first case");
+} else {
+  console.log('No web3? You should consider trying MetaMask!')
+    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+  // web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
+}
 
 // stolen code zone ^^^
 
@@ -36,18 +36,31 @@ class ApplicationForm extends Component{
       email : '',
       gitHubUrl : '',
       linkedInUrl : '',
-      interest : ''
+      industry : '',
+      roomShare : true,
     }
 
     this.imgUrl = './ethMemphis.jpg';
 
     this.handleSubmit=this.handleSubmit.bind(this);
     this.handleTextChange=this.handleTextChange.bind(this);
+    this.handleRadioChange=this.handleRadioChange.bind(this);
   }
 
   handleTextChange = (event) => {
     if(this.state[event.target.id] !== undefined){
       this.setState({[event.target.id]: event.target.value});
+    }
+  }
+  handleRadioChange = (event) => {
+    if(this.state.roomShare === true){
+      this.setState({
+        roomShare : false
+      })
+    } else {
+      this.setState({
+        roomShare : true
+      })
     }
   }
 
@@ -67,7 +80,7 @@ class ApplicationForm extends Component{
       this.state.email,
       this.state.gitHubUrl,
       this.state.linkedInUrl,
-      this.state.interest,
+      this.state.industry,
       {from: web3.eth.accounts[0], gas: 3000000},
       (err,res)=>{
         if(err){
@@ -102,8 +115,12 @@ class ApplicationForm extends Component{
             <p>LinkedIn URL:
               <input id="linkedInUrl" type="text" onChange={this.handleTextChange} value={this.state.linkedInUrl} />
             </p>
-            <p>Your skills and interests:
-              <input id="interest" type="text" onChange={this.handleTextChange} value={this.state.interest} />
+            <p>Industry of Interest:
+              <input id="industry" type="text" onChange={this.handleTextChange} value={this.state.industry} />
+            </p>
+            <p>Willing to Share a Room?
+              Yes<input id="yes" type="radio" onChange={this.handleRadioChange} checked={this.state.roomShare === true} value={true} />
+              No<input id="no"  type="radio" onChange={this.handleRadioChange} checked={this.state.roomShare === false} value={false} />
             </p>
             <hr/>
             <p>
