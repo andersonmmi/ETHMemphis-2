@@ -81,11 +81,11 @@ class ApplicationForm extends Component{
       console.log(res);
     }));
     apply = AF.apply(
-      this.state.name,
-      this.state.email,
-      this.state.gitHubUrl,
-      this.state.linkedInUrl,
-      this.state.industry,
+      web3.fromAscii(this.state.name),
+      web3.fromAscii(this.state.email),
+      web3.fromAscii(this.state.gitHubUrl),
+      web3.fromAscii(this.state.linkedInUrl),
+      web3.fromAscii(this.state.industry),
       this.state.roomShare,
       {from: web3.eth.accounts[0], gas: 3000000},
       (err,res)=>{
