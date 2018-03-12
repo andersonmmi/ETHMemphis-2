@@ -1,0 +1,90 @@
+.container{
+  background-image: url('./ethMemphis.jpg');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
+.ApplicationForm {
+  margin: 1vh 1vw 1vh 1vw;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
+legend {
+  color: hsla(10, 14%, 97%, 0.96);
+  text-align: center;
+}
+
+img {
+  z-index: 100;
+  height: 200px;
+  width: 400px;
+}
+
+fieldset {
+  background: linear-gradient(
+    rgba(10,10,10,0.0),
+    rgba(10,10,10,1.0)
+  );
+  border: none;
+  background-repeat: no-repeat;
+}
+
+p {
+  color: rgba(234,240,241, 0.95);
+  display: flex;
+  flex-direction: row;
+  font-weight: lighter;
+  text-align: center;
+}
+
+label {
+  color: rgba(234,240,241, 0.95);
+  display: flex;
+  flex-direction: row;
+  font-weight: lighter;
+}
+.spacer{
+  width: 2em;
+}
+#yes {
+  flex-grow: 0;
+}
+#no {
+  flex-grow: 0;
+}
+
+input {
+  margin-left: 10px;
+  background-color: rgba(10,10,10,0.2);
+  flex-grow: 1;
+  border-color: rgba(10,10,10,0.0);
+  border-style: outset;
+  border-radius: 10px;
+  border-bottom-color: rgba(10,10,10,0.3);
+  border-right-color: rgba(10,10,10,0.3);
+}
+
+#submit {
+  background-color: rgba(9,135,199,0.95);
+  border-radius: 10px;
+  color: rgba(234,240,241, 1.0);
+  height: 27px;
+
+}
+.instructions{
+  justify-content: center;
+}
+.radio{
+  background-color: rgba(246,151,0,0.95);
+  width: 4px;
+
+}
