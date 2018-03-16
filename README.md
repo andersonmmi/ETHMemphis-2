@@ -1,1 +1,2 @@
-ApplicationForm.deployed().then(function(res){AF = ApplicationForm.at(res.address)})
+## EthMemphis
+This contains the final version of the code deployed for the EthMemphis developer's application process at apply.ethmemphis.com. 
