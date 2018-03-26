@@ -95,7 +95,8 @@ class ApplicationForm extends Component{
         }
         console.log("success!");
         console.log(res);
-        alert("Thank you for applying to EthMemphis");
+        alert("Thank you for applying to EthMemphis!\nClick OK to return home.");
+        window.location = 'https://ethmemphis.com/';
       }
     );
     console.log(apply);
