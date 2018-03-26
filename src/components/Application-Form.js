@@ -104,62 +104,81 @@ class ApplicationForm extends Component{
 
 
   render(){
-    console.log(typeof web3.version.network);
-    console.log(web3.version.network);
-    if (web3.version.network === "4"){
-      hasWeb3 =
-        <main className="container">
-        <div className="ApplicationForm">
-          <fieldset>
-            <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
-            <p>Name:
-              <input id="name" type="text" onChange={this.handleTextChange} value={this.state.name} />
-            </p>
-            <p>Email:
-              <input id="email" type="text" onChange={this.handleTextChange} value={this.state.email} />
-            </p>
-            <p>GitHub URL:
-              <input id="gitHubUrl" type="text" onChange={this.handleTextChange} value={this.state.gitHubUrl} />
-            </p>
-            <p>LinkedIn URL:
-              <input id="linkedInUrl" type="text" onChange={this.handleTextChange} value={this.state.linkedInUrl} />
-            </p>
-            <p>Industry of Interest:
-              <input id="industry" type="text" onChange={this.handleTextChange} value={this.state.industry} />
-            </p>
-            <label>Willing to Share a Room?
-              <div className="spacer"></div>
-              Yes<input id="yes" type="radio" onChange={this.handleRadioChange} checked={this.state.roomShare === true} value={true} />
-              <div className="spacer"></div>
-              No<input id="no"  type="radio" onChange={this.handleRadioChange} checked={this.state.roomShare === false} value={false} />
-              <div className="spacer"></div>
-            </label>
-            <hr/>
-            <p className="instructions">
-            Make sure you are logged into your primary Rinkeby account.
-            </p>
-            <p className="instructions">
-            Selected applicants will be able to reserve a free room on {"\n"} the Rinkeby test network through the BookLocal travel app.
-            </p>
-            <p>
-              <input id="submit" type="submit" value="Submit Application" onClick={this.handleSubmit} />
-            </p>
-          </fieldset>
-        </div>
-        </main>
-    } else {
-      hasWeb3 =
-        <main className="container">
-        <div className="ApplicationForm">
-          <fieldset>
-            <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
-            <p>Make sure you have MetaMask installed and you are on the Rinkeby Test Network.
-            </p>
-            <p>After switching to Rinkeby, hit the back button and re-navigate to the application form.
-            </p>
-          </fieldset>
-        </div>
-        </main>
+    try {
+        if (web3.version.network === "4"){
+          hasWeb3 =
+            <main className="container">
+            <div className="ApplicationForm">
+              <fieldset>
+                <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
+                <p>Name:
+                  <input id="name" type="text" onChange={this.handleTextChange} value={this.state.name} />
+                </p>
+                <p>Email:
+                  <input id="email" type="text" onChange={this.handleTextChange} value={this.state.email} />
+                </p>
+                <p>GitHub URL:
+                  <input id="gitHubUrl" type="text" onChange={this.handleTextChange} value={this.state.gitHubUrl} />
+                </p>
+                <p>LinkedIn URL:
+                  <input id="linkedInUrl" type="text" onChange={this.handleTextChange} value={this.state.linkedInUrl} />
+                </p>
+                <p>Industry of Interest:
+                  <input id="industry" type="text" onChange={this.handleTextChange} value={this.state.industry} />
+                </p>
+                <label>Willing to Share a Room?
+                  <div className="spacer"></div>
+                  Yes<input id="yes" type="radio" onChange={this.handleRadioChange} checked={this.state.roomShare === true} value={true} />
+                  <div className="spacer"></div>
+                  No<input id="no"  type="radio" onChange={this.handleRadioChange} checked={this.state.roomShare === false} value={false} />
+                  <div className="spacer"></div>
+                </label>
+                <hr/>
+                <p className="instructions">
+                Please make sure you are logged into your primary Rinkeby account.
+                </p>
+                <p className="instructions">
+                Selected applicants will be able to reserve a free room on the Rinkeby test network with the BookLocal travel app.
+                </p>
+                <p>
+                  <input id="submit" type="submit" value="Submit Application" onClick={this.handleSubmit} />
+                </p>
+              </fieldset>
+            </div>
+            </main>
+        } else {
+          console.log(web3.version.network);
+          hasWeb3 =
+            <main className="container">
+            <div className="ApplicationForm">
+              <fieldset>
+                <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
+                <p className="instructions">Please make sure you are on the Rinkeby Test Network.
+                </p>
+                <p className="instructions">To reload properly, hit the back arrow, then switch to the Rinkeby test network, and finally re-navigate to this page.
+                </p>
+              </fieldset>
+            </div>
+            </main>
+        }
+    } catch(err) {
+        hasWeb3 =
+          <main className="container">
+          <div className="ApplicationForm">
+            <fieldset>
+              <legend><img src={ethmemphisLogo} role="presentation"></img></legend>
+              <p className="instructions">
+                It appears you are not connected to web3.
+              </p>
+              <p className="instructions">
+                We recommend installing the Metamask extention for Google Chrome.
+              </p>
+              <p className="instructions">
+                After switching to the Rinkeby test network, hit the back button and re-navigate to the application form.
+              </p>
+            </fieldset>
+          </div>
+          </main>
     }
 
     return (

@@ -1,3 +1,5 @@
+
+// new abi for updated contract
 const AFAbi = [
   {
     "constant": true,
@@ -78,17 +80,46 @@ const AFAbi = [
     "type": "function"
   },
   {
-    "constant": false,
+    "constant": true,
     "inputs": [
       {
-        "name": "_newOrganizer",
-        "type": "address"
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name": "addOrganzier",
-    "outputs": [],
+    "name": "applications",
+    "outputs": [
+      {
+        "name": "applicant",
+        "type": "address"
+      },
+      {
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "name": "email",
+        "type": "bytes32"
+      },
+      {
+        "name": "gitHubUrl",
+        "type": "bytes32"
+      },
+      {
+        "name": "linkedInUrl",
+        "type": "bytes32"
+      },
+      {
+        "name": "interest",
+        "type": "bytes32"
+      },
+      {
+        "name": "shareRoom",
+        "type": "bool"
+      }
+    ],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {

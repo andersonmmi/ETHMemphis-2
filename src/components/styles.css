@@ -25,9 +25,14 @@ legend {
 
 img {
   z-index: 100;
+<<<<<<< HEAD
   /* height: 200px;
   width: 400px; */
   width: 80%;
+=======
+  height: 200px;
+  width: 400px;
+>>>>>>> 013078a879b8dc74a7c3533b529e7eb37564df24
 }
 
 fieldset {
