@@ -101,8 +101,6 @@ class ApplicationForm extends Component{
     console.log(apply);
   }
 
-
-
   render(){
     try {
         if (web3.version.network === "4"){
